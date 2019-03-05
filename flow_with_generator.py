@@ -18,6 +18,10 @@ from keras.utils import multi_gpu_model
 from keras.utils import Sequence
 import math
 
+BATCH_SIZE = 64
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+
+
 data = pd.read_csv("Reinforced_mixed_benefits.csv")
 rows = np.asarray(data.iloc[:, :])
 print("Start shuffling.")
@@ -28,9 +32,11 @@ train_data = rows[:int(0.6*(len(rows)))]
 val_data = rows[int(0.6*(len(rows))):int(0.8*(len(rows)))]
 test_data = rows[int(0.8*(len(rows))):]
 
+pd.DataFrame(test_data).to_csv("test_data.csv",header=0,index=False)
+
 class DataGenerator(Sequence):
 
-    def __init__(self, datas, batch_size=1, shuffle=True):
+    def __init__(self, datas, batch_size=BATCH_SIZE, shuffle=True):
         self.batch_size = batch_size
         self.datas = datas
         self.indexes = np.arange(len(self.datas))
@@ -72,8 +78,8 @@ class DataGenerator(Sequence):
         # print("data_generation: ",np.array(images).shape,np.array(labels).shape)
         return np.array(images), np.array(labels)
 
-train_generator = DataGenerator(datas=train_data,batch_size=32)
-val_generator = DataGenerator(datas=val_data,batch_size=32)
+train_generator = DataGenerator(datas=train_data,batch_size=BATCH_SIZE)
+val_generator = DataGenerator(datas=val_data,batch_size=BATCH_SIZE)
 
 conv_base = VGG16(weights='imagenet', include_top=False, input_shape=(128,128,3))
 model = models.Sequential()
@@ -96,42 +102,44 @@ model.compile(optimizer=optimizers.RMSprop(lr=2e-5),
         loss='categorical_crossentropy',
         metrics=['acc'])
 
-model.fit_generator(train_generator,
-        samples_per_epoch=10000,epochs=5,validation_data=val_generator)
+steps_per_epoch = math.ceil(len(data) / BATCH_SIZE)
+
+history = model.fit_generator(train_generator,
+        steps_per_epoch=steps_per_epoch,epochs=10,validation_data=val_generator)
 
 model.save("generator.h5")
 
-# # history = model.fit(X_train, y_train, epochs=5, batch_size=64,validation_data=(X_val,y_val))
+# history = model.fit(X_train, y_train, epochs=5, batch_size=64,validation_data=(X_val,y_val))
 # test_loss, test_acc = model.evaluate(X_test, y_test)
 # print('Test accuracy:', test_acc)
 # predictions = model.predict(X_test)
 
-# loss = history.history['loss']
-# val_loss = history.history['val_loss']
+loss = history.history['loss']
+val_loss = history.history['val_loss']
 
-# epochs = range(1, len(loss) + 1)
+epochs = range(1, len(loss) + 1)
 
-# plt.plot(epochs, loss, 'bo', label='Training loss')
-# plt.plot(epochs, val_loss, 'b', label='Validation loss')
-# plt.title('Training and validation loss')
-# plt.xlabel('Epochs')
-# plt.ylabel('Loss')
-# plt.legend()
+plt.plot(epochs, loss, 'bo', label='Training loss')
+plt.plot(epochs, val_loss, 'b', label='Validation loss')
+plt.title('Training and validation loss')
+plt.xlabel('Epochs')
+plt.ylabel('Loss')
+plt.legend()
 
-# plt.show()
-# plt.savefig("Training_and_validation_loss.png")
+plt.show()
+plt.savefig("Training_and_validation_loss.png")
 
-# plt.clf()
+plt.clf()
 
-# acc = history.history['acc']
-# val_acc = history.history['val_acc']
+acc = history.history['acc']
+val_acc = history.history['val_acc']
 
-# plt.plot(epochs, acc, 'bo', label='Training acc')
-# plt.plot(epochs, val_acc, 'b', label='Validation acc')
-# plt.title('Training and Validation accuracy')
-# plt.xlabel('Epochs')
-# plt.ylabel('Accuracy')
-# plt.legend()
+plt.plot(epochs, acc, 'bo', label='Training acc')
+plt.plot(epochs, val_acc, 'b', label='Validation acc')
+plt.title('Training and Validation accuracy')
+plt.xlabel('Epochs')
+plt.ylabel('Accuracy')
+plt.legend()
 
-# plt.show()
-# plt.savefig("Training_and_validation_accuracy.png")
+plt.show()
+plt.savefig("Training_and_validation_accuracy.png")
