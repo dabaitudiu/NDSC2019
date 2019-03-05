@@ -20,3 +20,5 @@ VGG16.py - VGG16模型
 **2019/3/5:**:
 - generator 憋出来了, ```flow_with_generator.py```
 - 提前生成增强图片并将信息存储到csv中,```pre_generation_images```
+- generator batch_size=32时准确率有点堪忧，=64时达到了70%以上。
+- 作为参考，也写了读入全部数据，然后分段save load训练的方法 ```flow_with_batches.py```
