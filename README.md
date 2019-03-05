@@ -23,3 +23,5 @@ VGG16.py - VGG16模型
 - generator batch_size=32时准确率有点堪忧，=64时达到了70%以上。
 - 作为参考，也写了读入全部数据，然后分段save load训练的方法 ```flow_with_batches.py```
 - 改进了flow_with_batches, 现在用[shuffled_mixed](https://github.com/dabaitudiu/NDSC2019/blob/master/shuffled_mixed.py)和[read_from_shuffled_mixed](https://github.com/dabaitudiu/NDSC2019/blob/master/read_from_shuffled_mixed.py)组合
+![img](https://github.com/dabaitudiu/NDSC2019/blob/master/loss.png)
+![img](https://github.com/dabaitudiu/NDSC2019/blob/master/accuracy.png)
