@@ -24,3 +24,6 @@ VGG16.py - VGG16模型
 
 **2019/3/7:**:
 添加了parsers, 模块化大部分内容
+
+**2019/3/8:**:
+brand data preprocess, 去除所有nan，重新分配1-300的label

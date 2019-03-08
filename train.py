@@ -6,7 +6,6 @@ import pickle
 from tqdm import tqdm 
 import numpy as np 
 import c_img_array as cia
-import c_and_g_img_array as cgia
 from keras.utils import to_categorical
 from sklearn.model_selection import train_test_split
 from keras.applications import VGG16 
@@ -22,7 +21,7 @@ import config
 
 class DataGenerator(Sequence):
 
-    def __init__(self, datas, batch_size=BATCH_SIZE, shuffle=True):
+    def __init__(self, datas, batch_size=32, shuffle=True):
         self.batch_size = batch_size
         self.datas = datas
         self.indexes = np.arange(len(self.datas))
@@ -69,7 +68,7 @@ if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument('--gpu', '-g', type=str, default='0')
-    parser.add_argument('--bsize', '-b', type=int, defualt=64)
+    parser.add_argument('--bsize', '-b', type=int, default=32)
     parser.add_argument('--model', '-m', type=str, default='VGG16')
     parser.add_argument('--epochs','-e', type=int, default=5)
     args = parser.parse_args()
