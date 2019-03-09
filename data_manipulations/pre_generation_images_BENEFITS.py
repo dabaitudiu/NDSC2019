@@ -5,7 +5,7 @@ from tqdm import tqdm
 import numpy as np 
 
 
-data = pd.read_csv("mixed_benefits_1000.csv")
+data = pd.read_csv("mixed_benefits.csv")
 rows = np.asarray(data.iloc[:, :])
 
 datagen = ImageDataGenerator(rotation_range=50, width_shift_range=0.3, height_shift_range=0.3, shear_range=0.2,

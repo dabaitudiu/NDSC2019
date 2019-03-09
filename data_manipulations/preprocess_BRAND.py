@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import math
 from tqdm import tqdm 
+import matplotlib.pyplot as plt 
 
 data = pd.read_csv("beauty_data_info_train_competition.csv")
 
