@@ -39,3 +39,6 @@ EPOCHS: training epochs
 ### 文本处理：
 start with Beauty-Benefits:[nlp_benefits.py](https://github.com/dabaitudiu/NDSC2019/blob/master/nlp_benefits.py)<br>
 Word2vec生成word_dict, 过滤<=2低频词, 100维, max_length=20, feed in 1D CNN.
+
+- nlp_*.py, preprocess*.py 可以写成class，有时间优先处理一下
+- 当前结果:除product_texutre=97%, skin_type=75%, 其余都在81%-85%左右
