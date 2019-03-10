@@ -36,3 +36,6 @@ EPOCHS: training epochs
 - 3. [train_brand.py]() train brand
 - 4. (Unifinshed) Due to encapsulation in LABEL-Brands, some reference in LABEL-Benefits'codes should be changed.
 
+### 文本处理：
+start with Beauty-Benefits:[nlp_benefits.py](https://github.com/dabaitudiu/NDSC2019/blob/master/nlp_benefits.py)<br>
+Word2vec生成word_dict, 过滤<=2低频词, 100维, max_length=20, feed in 1D CNN.

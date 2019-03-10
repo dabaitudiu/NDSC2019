@@ -13,6 +13,6 @@ for i in tqdm(range(0,len(rows))):
     if not math.isnan(color):
         result.append(rows[i])
 
-for i in range(6):
-    new_df = pd.DataFrame(result).to_csv("mixed_benefits.csv", index=False, header=0)
+
+pd.DataFrame(result).to_csv("mixed_benefits.csv", index=False, header=data.columns)
     
