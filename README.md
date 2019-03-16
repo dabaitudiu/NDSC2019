@@ -42,3 +42,8 @@ Word2vec生成word_dict, 过滤<=2低频词, 100维, max_length=20, feed in 1D C
 
 - nlp_*.py, preprocess*.py 可以写成class，有时间优先处理一下
 - 当前结果:除product_texutre=97%, skin_type=75%, 其余都在81%-85%左右
+
+### 混合模型(Multi-Input):
+VGG Flatten后加Dense缩到512， 拼接text的200， 再加text导出的200维, 合并后加n层dense，最后一层output_dim个nodes.<br>
+[Multi_input.py](https://github.com/dabaitudiu/NDSC2019/blob/master/Multi_input.py)<br>
+[Multi_input_generator.py](https://github.com/dabaitudiu/NDSC2019/blob/master/Multi_input_generator.py)
