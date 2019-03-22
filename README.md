@@ -12,3 +12,5 @@ mobile/
     params.py
 
 ```
+疲惫中打出gg
+I've said it couldn't be that easy..
