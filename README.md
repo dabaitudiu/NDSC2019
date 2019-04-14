@@ -1,6 +1,6 @@
 # NDSC2019 solution
 ### Competition Info:
-[Shoppe NDSC2019: Kaggle](https://www.kaggle.com/c/ndsc-advanced/data)
+[Shopee NDSC2019: Kaggle](https://www.kaggle.com/c/ndsc-advanced/data)
 ### Descriptions:
 ```
 beauty/
